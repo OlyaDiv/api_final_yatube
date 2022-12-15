@@ -27,7 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=False, allow_null=True)
 
     class Meta:
-        fields = ('id', 'text', 'author', 'image', 'group', 'pub_date', )
+        fields = '__all__'
         model = Post
 
 
@@ -35,7 +35,7 @@ class GroupSerializer(serializers.ModelSerializer):
     """Сериализатор для модели Group.
     """
     class Meta:
-        fields = ('id', 'title', 'slug', 'description', )
+        fields = '__all__'
         model = Group
 
 
@@ -49,7 +49,7 @@ class CommentSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = ('id', 'author', 'post', 'text', 'created', )
+        fields = '__all__'
         read_only_fields = ('post', )
         model = Comment
 
@@ -60,13 +60,15 @@ class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
         slug_field='username',
         read_only=True,
-        default=serializers.CurrentUserDefault())
+        default=serializers.CurrentUserDefault()
+    )
     following = serializers.SlugRelatedField(
         slug_field='username',
-        queryset=User.objects.all())
+        queryset=User.objects.all()
+    )
 
     class Meta:
-        fields = ('user', 'following', )
+        fields = '__all__'
         model = Follow
         validators = [
             UniqueTogetherValidator(
