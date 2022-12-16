@@ -18,8 +18,7 @@ class Base64ImageField(serializers.ImageField):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели Post.
-    """
+    """Сериализатор для модели Post."""
     author = serializers.SlugRelatedField(
         slug_field='username',
         read_only=True
@@ -32,16 +31,14 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class GroupSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели Group.
-    """
+    """Сериализатор для модели Group."""
     class Meta:
         fields = '__all__'
         model = Group
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели Comment.
-    """
+    """Сериализатор для модели Comment."""
     author = serializers.SlugRelatedField(
         slug_field='username',
         default=serializers.CurrentUserDefault(),
@@ -55,8 +52,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    """Сериализатор для модели Follow.
-    """
+    """Сериализатор для модели Follow."""
     user = serializers.SlugRelatedField(
         slug_field='username',
         read_only=True,
